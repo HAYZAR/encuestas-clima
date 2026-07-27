@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Percepción del Clima de Aula — IED Los Rosales</title>
+<meta name="description" content="Encuesta anónima de percepción del clima de aula. IED Los Rosales." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --night:#0E1430; --deep:#131A38; --surface:#182142; --surface2:#141C3B;
+  --line:#2A3663; --line2:#3A4880;
+  --text:#ECEFF9; --muted:#A6AEC9; --faint:#727DA6;
+  --apricot:#F6A96B; --apricot-deep:#E0864A; --sky:#7CC6E6; --rose:#EF8FA0;
+  --danger:#F98F8F; --ok:#8BE0B0;
+  --accent:var(--apricot); --accent-soft:rgba(246,169,107,.15); --accent-line:rgba(246,169,107,.4);
+  --r:16px; --maxw:760px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--text); font-family:"Inter",system-ui,sans-serif; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(1100px 520px at 78% -8%, rgba(246,169,107,.14), transparent 58%),
+    radial-gradient(900px 480px at 10% 8%, rgba(124,198,230,.10), transparent 55%),
+    var(--night);
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:26px 20px 90px}
+a{color:var(--accent)}
+
+/* topbar */
+.topbar{display:flex; align-items:center; gap:12px; max-width:var(--maxw); margin:0 auto; padding:18px 20px 2px}
+.crest{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#22305f,#161e3e); box-shadow:0 0 0 1px var(--line) inset; font-family:"Fraunces";font-weight:700;color:#fdf0e4;font-size:15px}
+.crest::after{content:"";position:absolute;left:-6px;bottom:-14px;width:48px;height:26px;border-radius:50%;
+  background:radial-gradient(circle at 50% 0,var(--apricot),transparent 70%);opacity:.7}
+.brand{font-family:"Fraunces";font-weight:600;font-size:15px}
+.brand small{display:block;color:var(--faint);font-weight:400;font-size:11.5px;font-family:"Inter"}
+
+.eyebrow{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 10px}
+
+/* landing */
+.hero h1{font-family:"Fraunces"; font-weight:600; font-size:clamp(31px,6.4vw,50px); line-height:1.03; margin:6px 0 16px; letter-spacing:-.01em}
+.hero h1 em{font-style:italic; color:var(--apricot)}
+.lead{color:var(--muted); font-size:16px; max-width:60ch; margin:0 0 8px}
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:"Space Mono",monospace;font-size:11.5px;letter-spacing:.05em;
+  color:var(--muted); background:var(--surface2); border:1px solid var(--line); padding:7px 12px; border-radius:999px; margin-top:16px}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--sky);box-shadow:0 0 10px var(--sky)}
+
+.dims{display:grid;gap:10px;margin-top:28px}
+@media(min-width:600px){.dims{grid-template-columns:1fr 1fr}}
+.dim{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--surface2));border-radius:12px;padding:14px 16px}
+.dim .n{font-family:"Space Mono";font-size:11px;color:var(--faint);margin-top:2px}
+.dim b{font-family:"Fraunces";font-weight:600;font-size:15px;display:block;margin-bottom:2px}
+.dim span{color:var(--muted);font-size:13px}
+
+.privacy{margin-top:26px;border:1px solid var(--line);border-left:3px solid var(--sky);background:var(--surface2);
+  border-radius:12px;padding:15px 17px;color:var(--muted);font-size:13px}
+.privacy b{color:var(--text)}
+.start{margin-top:26px;width:100%}
+.foot{margin-top:30px;color:var(--faint);font-size:12px}
+
+/* form shell */
+.form-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
+.back{background:none;border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:8px 12px;font:inherit;font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.back:hover{color:var(--text);border-color:var(--line2)}
+.back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.tag{font-family:"Space Mono";font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-line);background:var(--accent-soft);padding:6px 11px;border-radius:999px}
+
+.form-title{font-family:"Fraunces";font-weight:600;font-size:clamp(23px,4.6vw,32px);margin:14px 0 2px;letter-spacing:-.01em}
+.form-sub{color:var(--muted);font-size:14px;margin:0 0 22px}
+
+.progress{display:flex;gap:6px;margin:0 0 8px}
+.progress .seg{flex:1;height:5px;border-radius:99px;background:var(--line);overflow:hidden}
+.progress .seg .fill{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--apricot),var(--sky));transition:width .35s ease}
+.progress .seg.active .fill,.progress .seg.done .fill{width:100%}
+.step-label{font-family:"Space Mono";font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:0 0 18px}
+.step-label b{color:var(--accent)}
+
+.step{animation:rise .35s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.q{background:linear-gradient(180deg,var(--surface),var(--surface2));border:1px solid var(--line);border-radius:var(--r);padding:18px 18px 8px;margin-bottom:14px}
+.q > .qh{font-family:"Fraunces";font-weight:600;font-size:16px;margin:0 0 3px}
+.q .req{color:var(--accent);font-weight:700}
+.q .help{color:var(--faint);font-size:12.5px;margin:0 0 12px}
+.q.err{border-color:var(--danger)}
+.q.err .qh{color:#fca5a5}
+
+.opts{display:grid;gap:9px;margin-top:12px}
+.opt{display:flex;align-items:flex-start;gap:11px;border:1px solid var(--line);background:var(--deep);border-radius:12px;padding:12px 14px;cursor:pointer;transition:.14s;font-size:14.5px;position:relative}
+.opt:hover{border-color:var(--line2);background:#1a2346}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .mark{flex:none;width:20px;height:20px;border-radius:50%;border:1.6px solid var(--line2);display:grid;place-items:center;margin-top:1px;transition:.14s}
+.opt .mark svg{width:12px;height:12px;stroke:#12183a;fill:none;stroke-width:3;opacity:0}
+.opt.on{border-color:var(--accent-line);background:var(--accent-soft)}
+.opt.on .mark{background:var(--accent);border-color:var(--accent)}
+.opt.on .mark svg{opacity:1}
+
+.note-warn{border:1px solid var(--line);border-left:3px solid var(--rose);background:var(--surface2);border-radius:12px;padding:12px 15px;color:var(--muted);font-size:13px;margin-bottom:14px}
+.note-warn b{color:var(--text)}
+
+.likert{margin-top:4px;margin-bottom:14px;background:linear-gradient(180deg,var(--surface),var(--surface2));border:1px solid var(--line);border-radius:var(--r);padding:8px 14px 14px;overflow-x:auto}
+.likert h4{font-family:"Fraunces";font-weight:600;font-size:15px;margin:12px 2px 6px}
+.likert table{width:100%;border-collapse:collapse;min-width:480px}
+.likert th{font-family:"Space Mono";font-size:10px;letter-spacing:.02em;color:var(--muted);font-weight:400;text-align:center;padding:8px 6px;vertical-align:bottom}
+.likert th.first{text-align:left;width:46%}
+.likert td{padding:9px 6px;border-top:1px solid var(--line)}
+.likert td.stmt{font-size:13.5px;color:var(--text)}
+.likert td.cell{text-align:center}
+.lk{width:22px;height:22px;border-radius:50%;border:1.6px solid var(--line2);display:inline-grid;place-items:center;cursor:pointer;transition:.14s}
+.lk:hover{border-color:var(--accent-line)}
+.lk.on{background:var(--accent);border-color:var(--accent)}
+.lk.on::after{content:"";width:8px;height:8px;border-radius:50%;background:#12183a}
+.likert.err{border-color:var(--danger)}
+.likert-mini{display:none}
+.mini-block{margin-top:14px}
+.mini-stmt{font-size:14px;margin:16px 2px 8px}
+.mini-scale{display:grid;gap:7px}
+
+textarea,input[type=text]{width:100%;background:var(--deep);border:1px solid var(--line);border-radius:12px;color:var(--text);
+  font:inherit;font-size:14.5px;padding:12px 14px;resize:vertical;margin-top:10px}
+textarea:focus,input[type=text]:focus{outline:none;border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-soft)}
+textarea::placeholder,input::placeholder{color:var(--faint)}
+
+.nav{display:flex;gap:12px;margin-top:22px}
+.btn{font:inherit;font-weight:600;font-size:14.5px;border-radius:12px;padding:13px 20px;cursor:pointer;border:1px solid transparent;transition:.15s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.btn.prev{background:transparent;border-color:var(--line);color:var(--muted)}
+.btn.prev:hover{color:var(--text);border-color:var(--line2)}
+.btn.next{background:var(--accent);color:#12183a;flex:1;box-shadow:0 10px 26px -14px var(--accent)}
+.btn.next:hover{filter:brightness(1.05)}
+.btn.next:disabled{opacity:.6;cursor:progress}
+.errline{color:var(--danger);font-size:13px;margin-top:12px;display:none}
+.errline.show{display:block}
+
+.done{text-align:center;padding:44px 10px;animation:rise .4s ease both}
+.done .seal{width:80px;height:80px;border-radius:50%;margin:0 auto 22px;display:grid;place-items:center;background:var(--accent-soft);border:1px solid var(--accent-line)}
+.done .seal svg{width:38px;height:38px;stroke:var(--accent);fill:none;stroke-width:2.4}
+.done h2{font-family:"Fraunces";font-size:27px;margin:0 0 8px}
+.done p{color:var(--muted);max-width:46ch;margin:0 auto 24px}
+
+@media(max-width:540px){
+  .likert table{display:none}
+  .likert-mini{display:block}
+  .likert{padding:8px 14px 6px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="crest">LR</div>
+  <div class="brand">IED Los Rosales<small>Percepción del Clima de Aula · 2026</small></div>
+</div>
+
+<main class="wrap" id="app"></main>
+
+<script>
+/* ============================================================
+   CONFIG
+   - SCRIPT_URL: puede ser el MISMO Apps Script de las encuestas de
+     tareas. Como el backend crea una pestaña por "tipo", estas
+     respuestas caeran en una pestana nueva: "ClimaAula".
+   ============================================================ */
+const CONFIG = {
+  SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxZv9O2ZT4TcRk-xqgDxvcKtN7OAQ6BpNvOlisN14b44TWqYS65s1YkbDzxT87s0VxT/exec",
+  TIPO: "ClimaAula"
+};
+
+const ESC = ["Siempre","Casi siempre","A veces","Nunca"];
+
+/* ---------- estructura del cuestionario ---------- */
+const SURVEY = {
+  sections: [
+    { parte:"Datos generales", short:"Datos", qs:[
+      {id:"periodo",label:"Periodo",type:"single",required:true,q:"¿En qué momento del año respondes?",opts:["2026 · Primer semestre","2026 · Segundo semestre"]},
+      {id:"jornada",label:"Jornada",type:"single",required:true,q:"Jornada",opts:["Mañana","Tarde"]},
+      {id:"grado",label:"Grado",type:"text",required:true,q:"¿En qué grado estás?",placeholder:"Ej. 7º"},
+      {id:"grupo",label:"Grupo",type:"text",required:true,q:"¿Cuál es tu grupo o sección?",placeholder:"Ej. 2, A, 01…"},
+      {id:"edad",label:"Edad",type:"single",required:true,q:"¿Cuántos años tienes?",opts:["8 a 10","11 a 13","14 a 16","17 o más"]},
+      {id:"sexo",label:"Sexo",type:"single",required:false,q:"Sexo",help:"Opcional.",opts:["Femenino","Masculino","Prefiero no decirlo"]},
+      {id:"primer_ano",label:"Primer año en la institución",type:"single",required:true,q:"¿Es este tu primer año en la institución?",opts:["Sí","No"]},
+    ]},
+
+    { parte:"Dimensión 1 · Contexto interpersonal", short:"Interpersonal",
+      intro:"Piensa en cómo son las relaciones en tu salón, entre compañeros y con tus profesores.",
+      qs:[
+      {id:"d1",label:"Interpersonal",type:"likert",required:true,scale:ESC,q:"¿Con qué frecuencia ocurre esto en tu salón?",statements:[
+        "Los alumnos tenemos buena comunicación con los profesores.",
+        "El profesor muestra interés en conocer a sus alumnos y sus problemas.",
+        "El maestro responde con interés a las preguntas que le hacemos.",
+        "Me llevo bien con los niños y niñas de mi salón.",
+        "Los alumnos son amables con sus compañeros.",
+        "Los alumnos se apoyan y se ayudan mutuamente.",
+        "Existe armonía y sana convivencia en el aula."
+      ]},
+    ]},
+
+    { parte:"Situaciones por observar", short:"Alertas",
+      warn:"En estas frases, responder <b>“Siempre” o “Casi siempre” señala algo que debemos mejorar</b>. Contesta con sinceridad: nos ayuda a cuidar a todos.",
+      qs:[
+      {id:"alerta",label:"Situación por observar",type:"likert",required:true,scale:ESC,q:"¿Con qué frecuencia pasa esto en tu salón?",statements:[
+        "Los alumnos excluyen a sus compañeros de juegos o actividades.",
+        "Los alumnos se agreden verbalmente entre ellos.",
+        "En el salón se presentan situaciones de acoso escolar (matoneo)."
+      ]},
+    ]},
+
+    { parte:"Dimensión 2 · Contexto regulativo", short:"Regulativo",
+      intro:"Ahora piensa en las normas, los acuerdos y cómo se resuelven los conflictos.",
+      qs:[
+      {id:"d2",label:"Regulativo",type:"likert",required:true,scale:ESC,q:"¿Con qué frecuencia ocurre esto?",statements:[
+        "En mi salón existen normas de convivencia claras que ayudan a estar bien.",
+        "Los alumnos siguen las reglas dentro del aula.",
+        "Los alumnos participan en la elaboración de los acuerdos del aula.",
+        "Los alumnos respetan y ayudan a que se cumplan las normas y acuerdos del aula.",
+        "Los problemas que se presentan se resuelven oportunamente.",
+        "Los alumnos resuelven los conflictos a través del diálogo.",
+        "Cuando hay un conflicto, se recurre a un mediador (docente, orientador…)."
+      ]},
+    ]},
+
+    { parte:"Dimensión 3 · Contexto instruccional", short:"Instruccional",
+      intro:"Piensa en las clases, las explicaciones y tu motivación para aprender.",
+      qs:[
+      {id:"d3",label:"Instruccional",type:"likert",required:true,scale:ESC,q:"¿Con qué frecuencia ocurre esto?",statements:[
+        "El profesor usa estrategias variadas para que aprendamos con facilidad.",
+        "Las clases son interesantes y motivadoras.",
+        "El profesor explica con claridad los temas.",
+        "El profesor nos permite plantear diferentes soluciones a los problemas.",
+        "Los alumnos estamos motivados para las actividades a favor de la convivencia.",
+        "Las actividades académicas y culturales que hacemos en clase son variadas y motivadoras."
+      ]},
+    ]},
+
+    { parte:"Dimensión 4 · Contexto imaginativo", short:"Imaginativo",
+      intro:"Por último, piensa en la creatividad y las ideas nuevas en tu aula.",
+      qs:[
+      {id:"d4",label:"Imaginativo",type:"likert",required:true,scale:ESC,q:"¿Con qué frecuencia ocurre esto?",statements:[
+        "El profesor nos ayuda a estimular la imaginación y la creatividad.",
+        "En clase tenemos oportunidades para crear y proponer ideas nuevas.",
+        "En el aula se valoran las ideas originales y diferentes."
+      ]},
+    ]},
+
+    { parte:"Para cerrar", short:"Cierre", qs:[
+      {id:"global",label:"Valoración global",type:"single",required:true,q:"En general, ¿te sientes a gusto y seguro(a) en tu salón?",opts:["Siempre","Casi siempre","A veces","Nunca"]},
+      {id:"sugerencia",label:"Sugerencia para mejorar el aula",type:"open",q:"¿Qué sugerencias darías para mejorar el ambiente en tu aula?",placeholder:"Escribe tu idea… (opcional)"},
+    ]},
+  ]
+};
+
+/* ============================================================
+   Motor de render (probado en las encuestas de tareas)
+   ============================================================ */
+const app = document.getElementById("app");
+let state = { step:0, answers:{}, started:false };
+
+const ICONS = {
+  arrow:'<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  back:'<svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>',
+  check:'<svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>',
+  send:'<svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>'
+};
+
+function renderLanding(){
+  app.innerHTML = `
+    <section class="hero">
+      <p class="eyebrow">Encuesta semestral · Estudiantes</p>
+      <h1>¿Cómo se siente el <em>clima</em> de tu salón?</h1>
+      <p class="lead">Queremos conocer tu percepción sobre el ambiente que vives en tu aula: cómo son las relaciones, las normas, las clases y el espacio para la creatividad. No hay respuestas correctas ni incorrectas.</p>
+      <span class="chip"><span class="dot"></span> Anónima · toma 10–15 minutos</span>
+
+      <div class="dims">
+        <div class="dim"><span class="n">01</span><div><b>Interpersonal</b><span>Relaciones con compañeros y profesores</span></div></div>
+        <div class="dim"><span class="n">02</span><div><b>Regulativo</b><span>Normas, acuerdos y conflictos</span></div></div>
+        <div class="dim"><span class="n">03</span><div><b>Instruccional</b><span>Clases, motivación y aprendizaje</span></div></div>
+        <div class="dim"><span class="n">04</span><div><b>Imaginativo</b><span>Creatividad e ideas nuevas</span></div></div>
+      </div>
+
+      <div class="privacy"><b>Tus respuestas son anónimas.</b> No pedimos tu nombre. La información se usa solo para mejorar el ambiente de tu salón y se trata conforme a la Ley 1581 de 2012 (Habeas Data).</div>
+      <button class="btn next start" id="start">Comenzar ${ICONS.arrow}</button>
+      <p class="foot">IED Los Rosales · Gestión Académica</p>
+    </section>`;
+  app.querySelector("#start").addEventListener("click",()=>{ state.started=true; state.step=0; renderStep(); });
+}
+
+function renderStep(){
+  const secs = SURVEY.sections, total = secs.length, sec = secs[state.step];
+  const isLast = state.step === total-1;
+  const segs = secs.map((_,i)=>`<div class="seg ${i<state.step?'done':(i===state.step?'active':'')}"><span class="fill"></span></div>`).join("");
+
+  app.innerHTML = `
+    <div class="form-head">
+      <button class="back">${ICONS.back} Inicio</button>
+      <span class="tag">Clima de aula</span>
+    </div>
+    <h1 class="form-title">${sec.parte}</h1>
+    <p class="form-sub">${sec.short==='Datos'?'Cuéntanos un poco sobre ti (sin tu nombre).':'Marca la opción que mejor refleje tu experiencia.'}</p>
+    <div class="progress">${segs}</div>
+    <div class="step-label">Paso <b>${state.step+1}</b> de ${total} — ${sec.short}</div>
+    <div class="step" id="step">
+      ${sec.intro?`<div class="privacy" style="border-left-color:var(--accent);margin-top:0;margin-bottom:16px">${sec.intro}</div>`:""}
+      ${sec.warn?`<div class="note-warn">${sec.warn}</div>`:""}
+      ${sec.qs.map(renderQ).join("")}
+    </div>
+    <div class="errline" id="errline">Por favor responde todo lo marcado con * antes de continuar.</div>
+    <div class="nav">
+      ${state.step>0?`<button class="btn prev">${ICONS.back} Anterior</button>`:""}
+      <button class="btn next" id="next">${isLast?`Enviar respuestas ${ICONS.send}`:`Siguiente ${ICONS.arrow}`}</button>
+    </div>`;
+
+  app.querySelector(".back").addEventListener("click",()=>{ if(confirm("¿Volver al inicio? Se perderán tus respuestas.")){ state={step:0,answers:{},started:false}; renderLanding(); }});
+  const prev=app.querySelector(".prev"); if(prev) prev.addEventListener("click",()=>{ state.step--; renderStep(); });
+  app.querySelector("#next").addEventListener("click",()=> isLast?submit():nextStep());
+  wireInputs();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderQ(q){
+  const a=state.answers[q.id]; let body="";
+  if(q.type==="single"){
+    body=`<div class="opts" data-q="${q.id}" data-type="single">`+q.opts.map(o=>{
+      const on=a===o; return `<label class="opt ${on?'on':''}" data-v="${esc(o)}"><span class="mark">${ICONS.check}</span><span>${o}</span></label>`;
+    }).join("")+`</div>`;
+  } else if(q.type==="text"){
+    body=`<input type="text" data-q="${q.id}" placeholder="${q.placeholder||''}" value="${a?esc(a):''}" />`;
+  } else if(q.type==="open"){
+    body=`<textarea rows="3" data-q="${q.id}" placeholder="${q.placeholder||''}">${a?esc(a):''}</textarea>`;
+  } else if(q.type==="likert"){
+    const head=`<tr><th class="first"></th>${q.scale.map(x=>`<th>${x}</th>`).join("")}</tr>`;
+    const rows=q.statements.map((st,i)=>{
+      const sel=a&&a[i];
+      return `<tr><td class="stmt">${st}</td>${q.scale.map(sc=>`<td class="cell"><span class="lk ${sel===sc?'on':''}" data-q="${q.id}" data-i="${i}" data-v="${esc(sc)}"></span></td>`).join("")}</tr>`;
+    }).join("");
+    const mini=q.statements.map((st,i)=>{
+      const sel=a&&a[i];
+      return `<div class="mini-stmt">${st}</div><div class="mini-scale">`+q.scale.map(sc=>`<label class="opt ${sel===sc?'on':''}" data-lk data-q="${q.id}" data-i="${i}" data-v="${esc(sc)}"><span class="mark">${ICONS.check}</span><span>${sc}</span></label>`).join("")+`</div>`;
+    }).join("");
+    return `<div class="likert" data-qid="${q.id}"><h4>${q.q}</h4><table>${head}${rows}</table><div class="likert-mini mini-block">${mini}</div></div>`;
+  }
+  return `<div class="q" data-qid="${q.id}"><p class="qh">${q.q}${q.required?'<span class="req"> *</span>':''}</p>${q.help?`<p class="help">${q.help}</p>`:''}${body}</div>`;
+}
+
+function wireInputs(){
+  app.querySelectorAll(".opts").forEach(box=>{
+    const qid=box.dataset.q;
+    box.querySelectorAll(".opt").forEach(opt=>opt.addEventListener("click",()=>{
+      state.answers[qid]=opt.dataset.v;
+      box.querySelectorAll(".opt").forEach(o=>o.classList.toggle("on",o===opt));
+      clearErr(qid);
+    }));
+  });
+  app.querySelectorAll("input[type=text],textarea").forEach(inp=>inp.addEventListener("input",()=>{ state.answers[inp.dataset.q]=inp.value.trim(); clearErr(inp.dataset.q); }));
+  app.querySelectorAll(".lk, .opt[data-lk]").forEach(el=>el.addEventListener("click",()=>{
+    const qid=el.dataset.q, i=+el.dataset.i, v=el.dataset.v;
+    const a=(state.answers[qid]&&typeof state.answers[qid]==="object")?state.answers[qid]:{};
+    a[i]=v; state.answers[qid]=a;
+    app.querySelectorAll(`.lk[data-q="${qid}"][data-i="${i}"]`).forEach(d=>d.classList.toggle("on",d.dataset.v===v));
+    app.querySelectorAll(`.opt[data-lk][data-q="${qid}"][data-i="${i}"]`).forEach(d=>d.classList.toggle("on",d.dataset.v===v));
+    clearErr(qid);
+  }));
+}
+
+function clearErr(qid){ const el=app.querySelector(`.q[data-qid="${qid}"],.likert[data-qid="${qid}"]`); if(el)el.classList.remove("err"); }
+function esc(s){ return String(s).replace(/"/g,"&quot;").replace(/</g,"&lt;"); }
+
+function validate(sec){
+  let ok=true, first=null;
+  sec.qs.forEach(q=>{
+    if(!q.required) return;
+    const a=state.answers[q.id]; let filled;
+    if(q.type==="likert") filled=a&&Object.keys(a).length===q.statements.length;
+    else filled=a!=null&&String(a).trim()!=="";
+    if(!filled){ ok=false; const el=app.querySelector(`.q[data-qid="${q.id}"],.likert[data-qid="${q.id}"]`); if(el){el.classList.add("err"); if(!first)first=el;} }
+  });
+  if(!ok){ app.querySelector("#errline").classList.add("show"); if(first)first.scrollIntoView({behavior:"smooth",block:"center"}); }
+  return ok;
+}
+function nextStep(){ const sec=SURVEY.sections[state.step]; app.querySelector("#errline").classList.remove("show"); if(!validate(sec))return; state.step++; renderStep(); }
+
+function buildPayload(){
+  const fields=[];
+  SURVEY.sections.forEach(sec=>sec.qs.forEach(q=>{
+    const a=state.answers[q.id];
+    if(q.type==="likert") q.statements.forEach((st,i)=>fields.push({label:`${q.label}: ${st}`, value:(a&&a[i])||""}));
+    else fields.push({label:q.label, value:a!=null?String(a):""});
+  }));
+  return { tipo:CONFIG.TIPO, fields };
+}
+
+async function submit(){
+  const sec=SURVEY.sections[state.step];
+  app.querySelector("#errline").classList.remove("show");
+  if(!validate(sec))return;
+  const btn=app.querySelector("#next"); btn.disabled=true; btn.innerHTML="Enviando… ";
+  if(!CONFIG.SCRIPT_URL || CONFIG.SCRIPT_URL.startsWith("PEGA")){ setTimeout(renderDone,500); return; }
+  try{
+    await fetch(CONFIG.SCRIPT_URL,{ method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:JSON.stringify(buildPayload()) });
+    renderDone();
+  }catch(err){
+    const e=app.querySelector("#errline"); e.textContent="No pudimos enviar tus respuestas. Revisa tu conexión e inténtalo de nuevo."; e.classList.add("show");
+    btn.disabled=false; btn.innerHTML=`Reintentar ${ICONS.send}`;
+  }
+}
+
+function renderDone(){
+  app.innerHTML=`<div class="done">
+    <div class="seal">${ICONS.check}</div>
+    <h2>¡Gracias por responder!</h2>
+    <p>Tu percepción nos ayuda a construir un mejor ambiente en tu salón. </p>
+    <button class="btn next" style="max-width:300px;margin:0 auto" id="again">Responder de nuevo ${ICONS.arrow}</button>
+  </div>`;
+  app.querySelector("#again").addEventListener("click",()=>{ state={step:0,answers:{},started:false}; renderLanding(); });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+renderLanding();
+</script>
+</body>
+</html>
